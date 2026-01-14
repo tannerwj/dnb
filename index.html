@@ -713,7 +713,7 @@
                     <span id="nLevelDisplay">2</span>-Back |
                     Accuracy: <span id="accuracy">0%</span>
                 </div>
-                <button class="back-btn" onclick="backToStart()">← Back</button>
+                <button class="back-btn" onclick="backToStart(); event.stopPropagation();">← Back</button>
             </div>
 
             <div id="explanationPanel" class="explanation-panel">
@@ -739,10 +739,10 @@
 
             <div class="response-container">
                 <div class="response-buttons">
-                    <button class="response-btn" onclick="handleResponse('neither')">Neither</button>
-                    <button class="response-btn" onclick="handleResponse('position')">Position</button>
-                    <button class="response-btn" onclick="handleResponse('audio')">Audio</button>
-                    <button class="response-btn" onclick="handleResponse('both')">Both</button>
+                    <button class="response-btn" onclick="handleResponse('neither'); event.stopPropagation();">Neither</button>
+                    <button class="response-btn" onclick="handleResponse('position'); event.stopPropagation();">Position</button>
+                    <button class="response-btn" onclick="handleResponse('audio'); event.stopPropagation();">Audio</button>
+                    <button class="response-btn" onclick="handleResponse('both'); event.stopPropagation();">Both</button>
                 </div>
                 <div class="keyboard-hints">
                     Keyboard: Space = Neither | L = Position | A = Audio | B = Both
