@@ -13,7 +13,7 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d1b3d 50%, #1a1a1a 100%);
+            background: linear-gradient(135deg, #0a0e27 0%, #1a2332 50%, #0a0e27 100%);
             background-size: 400% 400%;
             animation: gradientShift 15s ease infinite;
             color: #fff;
@@ -61,7 +61,7 @@
             text-align: center;
             margin-bottom: 30px;
             font-size: 2.5em;
-            background: linear-gradient(135deg, #4a9eff 0%, #a855f7 50%, #4a9eff 100%);
+            background: linear-gradient(135deg, #4a9eff 0%, #00d4ff 50%, #4a9eff 100%);
             background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -122,7 +122,7 @@
             display: block;
             margin-bottom: 10px;
             font-weight: bold;
-            background: linear-gradient(135deg, #4a9eff, #a855f7);
+            background: linear-gradient(135deg, #4a9eff, #00d4ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -188,16 +188,16 @@
             align-items: center;
             gap: 10px;
             padding: 15px;
-            background: rgba(168, 85, 247, 0.1);
-            border: 2px solid rgba(168, 85, 247, 0.3);
+            background: rgba(0, 212, 255, 0.1);
+            border: 2px solid rgba(0, 212, 255, 0.3);
             border-radius: 10px;
             cursor: pointer;
             transition: all 0.3s ease;
         }
 
         .practice-toggle:hover {
-            background: rgba(168, 85, 247, 0.2);
-            border-color: rgba(168, 85, 247, 0.5);
+            background: rgba(0, 212, 255, 0.2);
+            border-color: rgba(0, 212, 255, 0.5);
         }
 
         .practice-toggle input[type="checkbox"] {
@@ -212,7 +212,7 @@
         }
 
         .practice-toggle input[type="checkbox"]:checked {
-            background: linear-gradient(135deg, #a855f7, #7c3aed);
+            background: linear-gradient(135deg, #4a9eff, #00d4ff);
         }
 
         .practice-toggle input[type="checkbox"]::before {
@@ -234,7 +234,7 @@
 
         .practice-label {
             font-weight: bold;
-            color: #a855f7;
+            color: #00d4ff;
         }
 
         .practice-description {
@@ -246,7 +246,7 @@
         .start-btn {
             width: 100%;
             padding: 15px;
-            background: linear-gradient(135deg, #4a9eff, #a855f7);
+            background: linear-gradient(135deg, #4a9eff, #00d4ff);
             border: none;
             color: #fff;
             border-radius: 10px;
@@ -297,7 +297,7 @@
         }
 
         .game-info span {
-            background: linear-gradient(135deg, #4a9eff, #a855f7);
+            background: linear-gradient(135deg, #4a9eff, #00d4ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -305,12 +305,12 @@
         }
 
         .practice-badge {
-            background: linear-gradient(135deg, #a855f7, #7c3aed);
+            background: linear-gradient(135deg, #4a9eff, #00d4ff);
             padding: 4px 12px;
             border-radius: 20px;
             font-size: 0.85em;
             font-weight: bold;
-            box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+            box-shadow: 0 0 20px rgba(74, 158, 255, 0.5);
             animation: pulse 2s ease-in-out infinite;
         }
 
@@ -360,7 +360,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, rgba(74, 158, 255, 0.1), rgba(168, 85, 247, 0.1));
+            background: linear-gradient(135deg, rgba(74, 158, 255, 0.1), rgba(0, 212, 255, 0.1));
             opacity: 0;
             transition: opacity 0.3s ease;
         }
@@ -370,8 +370,8 @@
         }
 
         .grid-square.active {
-            background: linear-gradient(135deg, #4a9eff, #a855f7);
-            box-shadow: 0 0 40px rgba(74, 158, 255, 0.8), 0 0 80px rgba(168, 85, 247, 0.6);
+            background: linear-gradient(135deg, #4a9eff, #00d4ff);
+            box-shadow: 0 0 40px rgba(74, 158, 255, 0.8), 0 0 80px rgba(0, 212, 255, 0.6);
             animation: gridPulse 0.5s ease;
             transform: scale(1.05);
         }
@@ -383,8 +383,8 @@
 
         .explanation-panel {
             display: none;
-            background: rgba(168, 85, 247, 0.2);
-            border: 2px solid rgba(168, 85, 247, 0.5);
+            background: rgba(0, 212, 255, 0.15);
+            border: 2px solid rgba(0, 212, 255, 0.5);
             border-radius: 15px;
             padding: 20px;
             margin-bottom: 20px;
@@ -403,7 +403,7 @@
         .explanation-title {
             font-size: 1.2em;
             font-weight: bold;
-            color: #a855f7;
+            color: #00d4ff;
             margin-bottom: 10px;
         }
 
@@ -417,6 +417,22 @@
             border-radius: 8px;
             margin-top: 10px;
             font-family: monospace;
+        }
+
+        .continue-prompt {
+            text-align: center;
+            margin-top: 15px;
+            padding: 10px;
+            background: rgba(74, 158, 255, 0.2);
+            border-radius: 8px;
+            font-weight: bold;
+            color: #00d4ff;
+            animation: blink 1.5s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
         }
 
         .response-container {
@@ -586,7 +602,7 @@
         .result-buttons button {
             flex: 1;
             padding: 15px;
-            background: linear-gradient(135deg, #4a9eff, #a855f7);
+            background: linear-gradient(135deg, #4a9eff, #00d4ff);
             border: none;
             color: #fff;
             border-radius: 10px;
@@ -704,6 +720,7 @@
                 <div class="explanation-title">❌ Incorrect - Let's review</div>
                 <div class="explanation-content" id="explanationContent"></div>
                 <div class="explanation-details" id="explanationDetails"></div>
+                <div class="continue-prompt">Click anywhere or press any key to continue</div>
             </div>
 
             <div class="grid-container">
@@ -773,13 +790,13 @@
             isPaused: false,
             trialTimeout: null,
             awaitingResponse: false,
-            practiceMode: false
+            practiceMode: false,
+            awaitingContinue: false
         };
 
         const LETTERS = ['C', 'H', 'K', 'L', 'Q', 'R', 'S', 'T'];
         const TRIAL_DURATION = 2500;
         const STIMULUS_DURATION = 500;
-        const PRACTICE_EXPLANATION_DURATION = 3000;
 
         // Screen management
         function showScreen(screenId) {
@@ -1001,9 +1018,12 @@
 
             updateAccuracy();
 
-            // Schedule next trial with delay for explanation in practice mode
-            const delay = (gameState.practiceMode && !isCorrect && nBackIndex >= 0) ? PRACTICE_EXPLANATION_DURATION : 500;
-            setTimeout(nextTrial, delay);
+            // Schedule next trial - but wait for user input in practice mode if incorrect
+            if (gameState.practiceMode && !isCorrect && nBackIndex >= 0) {
+                gameState.awaitingContinue = true;
+            } else {
+                setTimeout(nextTrial, 500);
+            }
         }
 
         // Update accuracy display
@@ -1116,8 +1136,31 @@
             showScreen('startScreen');
         }
 
+        // Continue from explanation
+        function continueFromExplanation() {
+            if (gameState.awaitingContinue) {
+                gameState.awaitingContinue = false;
+                document.getElementById('explanationPanel').classList.remove('show');
+                setTimeout(nextTrial, 500);
+            }
+        }
+
+        // Click to continue
+        document.addEventListener('click', () => {
+            if (gameState.awaitingContinue) {
+                continueFromExplanation();
+            }
+        });
+
         // Keyboard shortcuts
         document.addEventListener('keydown', (e) => {
+            // Handle continue from explanation
+            if (gameState.awaitingContinue) {
+                e.preventDefault();
+                continueFromExplanation();
+                return;
+            }
+
             if (!gameState.isPlaying || gameState.isPaused || !gameState.awaitingResponse) {
                 return;
             }
