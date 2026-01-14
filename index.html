@@ -906,7 +906,7 @@
         // Play audio
         function playAudio(letter) {
             if ('speechSynthesis' in window) {
-                const utterance = new SpeechSynthesisUtterance(letter);
+                const utterance = new SpeechSynthesisUtterance(letter.toLowerCase());
                 utterance.rate = 1.0;
                 utterance.pitch = 1.0;
                 utterance.volume = 1.0;
