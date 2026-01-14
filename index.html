@@ -314,7 +314,7 @@
             animation: pulse 2s ease-in-out infinite;
         }
 
-        .pause-btn {
+        .back-btn {
             padding: 10px 20px;
             background: rgba(51, 51, 51, 0.8);
             border: 2px solid rgba(68, 68, 68, 0.8);
@@ -325,7 +325,7 @@
             transition: all 0.3s ease;
         }
 
-        .pause-btn:hover {
+        .back-btn:hover {
             background: rgba(68, 68, 68, 0.8);
             border-color: #4a9eff;
             box-shadow: 0 0 20px rgba(74, 158, 255, 0.4);
@@ -713,7 +713,7 @@
                     <span id="nLevelDisplay">2</span>-Back |
                     Accuracy: <span id="accuracy">0%</span>
                 </div>
-                <button class="pause-btn" onclick="pauseGame()">Pause</button>
+                <button class="back-btn" onclick="backToStart()">← Back</button>
             </div>
 
             <div id="explanationPanel" class="explanation-panel">
@@ -787,7 +787,6 @@
             trials: [],
             responses: [],
             isPlaying: false,
-            isPaused: false,
             trialTimeout: null,
             awaitingResponse: false,
             practiceMode: false,
@@ -837,8 +836,8 @@
             gameState.trials = [];
             gameState.responses = [];
             gameState.isPlaying = true;
-            gameState.isPaused = false;
             gameState.practiceMode = practiceMode;
+            gameState.awaitingContinue = false;
 
             document.getElementById('nLevelDisplay').textContent = nLevel;
             document.getElementById('totalTrials').textContent = totalTrials;
@@ -853,7 +852,7 @@
 
         // Next trial
         function nextTrial() {
-            if (!gameState.isPlaying || gameState.isPaused) return;
+            if (!gameState.isPlaying || gameState.awaitingContinue) return;
 
             if (gameState.currentTrial >= gameState.totalTrials) {
                 endGame();
@@ -957,7 +956,7 @@
 
         // Handle response
         function handleResponse(responseType, autoSubmit = false) {
-            if (!gameState.isPlaying || gameState.isPaused || (!gameState.awaitingResponse && !autoSubmit)) {
+            if (!gameState.isPlaying || gameState.awaitingContinue || (!gameState.awaitingResponse && !autoSubmit)) {
                 return;
             }
 
@@ -1034,13 +1033,15 @@
             document.getElementById('accuracy').textContent = accuracy + '%';
         }
 
-        // Pause game
-        function pauseGame() {
-            gameState.isPaused = !gameState.isPaused;
-            document.querySelector('.pause-btn').textContent = gameState.isPaused ? 'Resume' : 'Pause';
-
-            if (!gameState.isPaused) {
-                nextTrial();
+        // Back to start
+        function backToStart() {
+            if (confirm('Are you sure you want to quit this session? Your progress will be lost.')) {
+                gameState.isPlaying = false;
+                gameState.awaitingContinue = false;
+                if (gameState.trialTimeout) {
+                    clearTimeout(gameState.trialTimeout);
+                }
+                showScreen('startScreen');
             }
         }
 
@@ -1161,7 +1162,7 @@
                 return;
             }
 
-            if (!gameState.isPlaying || gameState.isPaused || !gameState.awaitingResponse) {
+            if (!gameState.isPlaying || !gameState.awaitingResponse) {
                 return;
             }
 
