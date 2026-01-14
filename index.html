@@ -13,18 +13,34 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: #1a1a1a;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d1b3d 50%, #1a1a1a 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
             color: #fff;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .container {
             max-width: 800px;
             width: 100%;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .screen {
@@ -33,13 +49,30 @@
 
         .screen.active {
             display: block;
+            animation: slideIn 0.4s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
         }
 
         h1 {
             text-align: center;
             margin-bottom: 30px;
             font-size: 2.5em;
-            color: #4a9eff;
+            background: linear-gradient(135deg, #4a9eff 0%, #a855f7 50%, #4a9eff 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s linear infinite;
+            text-shadow: 0 0 30px rgba(74, 158, 255, 0.3);
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
         }
 
         h2 {
@@ -49,11 +82,14 @@
         }
 
         .instructions {
-            background: #2a2a2a;
+            background: rgba(42, 42, 42, 0.8);
+            backdrop-filter: blur(10px);
             padding: 20px;
-            border-radius: 10px;
+            border-radius: 15px;
             margin-bottom: 30px;
             line-height: 1.6;
+            border: 1px solid rgba(74, 158, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
 
         .instructions p {
@@ -68,16 +104,28 @@
         }
 
         .setting-group {
-            background: #2a2a2a;
+            background: rgba(42, 42, 42, 0.8);
+            backdrop-filter: blur(10px);
             padding: 20px;
-            border-radius: 10px;
+            border-radius: 15px;
+            border: 1px solid rgba(74, 158, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .setting-group:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(74, 158, 255, 0.2);
         }
 
         .setting-group label {
             display: block;
             margin-bottom: 10px;
             font-weight: bold;
-            color: #4a9eff;
+            background: linear-gradient(135deg, #4a9eff, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .setting-options {
@@ -88,40 +136,147 @@
 
         .option-btn {
             padding: 10px 20px;
-            background: #333;
-            border: 2px solid #444;
+            background: rgba(51, 51, 51, 0.8);
+            border: 2px solid rgba(68, 68, 68, 0.8);
             color: #fff;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.3s ease;
             font-size: 1em;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(74, 158, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .option-btn:hover::before {
+            width: 300px;
+            height: 300px;
         }
 
         .option-btn:hover {
-            background: #444;
+            transform: scale(1.05);
             border-color: #4a9eff;
+            box-shadow: 0 0 20px rgba(74, 158, 255, 0.4);
         }
 
         .option-btn.selected {
-            background: #4a9eff;
+            background: linear-gradient(135deg, #4a9eff, #3a7dd5);
             border-color: #4a9eff;
+            box-shadow: 0 0 25px rgba(74, 158, 255, 0.6);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 25px rgba(74, 158, 255, 0.6); }
+            50% { box-shadow: 0 0 35px rgba(74, 158, 255, 0.8); }
+        }
+
+        .practice-toggle {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px;
+            background: rgba(168, 85, 247, 0.1);
+            border: 2px solid rgba(168, 85, 247, 0.3);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .practice-toggle:hover {
+            background: rgba(168, 85, 247, 0.2);
+            border-color: rgba(168, 85, 247, 0.5);
+        }
+
+        .practice-toggle input[type="checkbox"] {
+            width: 50px;
+            height: 26px;
+            appearance: none;
+            background: rgba(68, 68, 68, 0.8);
+            border-radius: 13px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .practice-toggle input[type="checkbox"]:checked {
+            background: linear-gradient(135deg, #a855f7, #7c3aed);
+        }
+
+        .practice-toggle input[type="checkbox"]::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: white;
+            top: 3px;
+            left: 3px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .practice-toggle input[type="checkbox"]:checked::before {
+            left: 27px;
+        }
+
+        .practice-label {
+            font-weight: bold;
+            color: #a855f7;
+        }
+
+        .practice-description {
+            font-size: 0.9em;
+            color: #aaa;
+            margin-top: 5px;
         }
 
         .start-btn {
             width: 100%;
             padding: 15px;
-            background: #4a9eff;
+            background: linear-gradient(135deg, #4a9eff, #a855f7);
             border: none;
             color: #fff;
-            border-radius: 5px;
+            border-radius: 10px;
             font-size: 1.2em;
             font-weight: bold;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 32px rgba(74, 158, 255, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .start-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .start-btn:hover::before {
+            left: 100%;
         }
 
         .start-btn:hover {
-            background: #3a8eef;
+            transform: scale(1.02);
+            box-shadow: 0 12px 40px rgba(74, 158, 255, 0.6);
         }
 
         .game-header {
@@ -130,8 +285,11 @@
             align-items: center;
             margin-bottom: 30px;
             padding: 15px;
-            background: #2a2a2a;
-            border-radius: 10px;
+            background: rgba(42, 42, 42, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            border: 1px solid rgba(74, 158, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
 
         .game-info {
@@ -139,29 +297,45 @@
         }
 
         .game-info span {
-            color: #4a9eff;
+            background: linear-gradient(135deg, #4a9eff, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             font-weight: bold;
+        }
+
+        .practice-badge {
+            background: linear-gradient(135deg, #a855f7, #7c3aed);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+            animation: pulse 2s ease-in-out infinite;
         }
 
         .pause-btn {
             padding: 10px 20px;
-            background: #333;
-            border: 2px solid #444;
+            background: rgba(51, 51, 51, 0.8);
+            border: 2px solid rgba(68, 68, 68, 0.8);
             color: #fff;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 1em;
+            transition: all 0.3s ease;
         }
 
         .pause-btn:hover {
-            background: #444;
+            background: rgba(68, 68, 68, 0.8);
             border-color: #4a9eff;
+            box-shadow: 0 0 20px rgba(74, 158, 255, 0.4);
         }
 
         .grid-container {
             display: flex;
             justify-content: center;
             margin-bottom: 40px;
+            perspective: 1000px;
         }
 
         .grid {
@@ -172,14 +346,77 @@
         }
 
         .grid-square {
-            background: #444;
-            border-radius: 5px;
-            transition: background 0.1s;
+            background: rgba(68, 68, 68, 0.6);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .grid-square::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(74, 158, 255, 0.1), rgba(168, 85, 247, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .grid-square:hover::before {
+            opacity: 1;
         }
 
         .grid-square.active {
-            background: #4a9eff;
-            box-shadow: 0 0 20px rgba(74, 158, 255, 0.6);
+            background: linear-gradient(135deg, #4a9eff, #a855f7);
+            box-shadow: 0 0 40px rgba(74, 158, 255, 0.8), 0 0 80px rgba(168, 85, 247, 0.6);
+            animation: gridPulse 0.5s ease;
+            transform: scale(1.05);
+        }
+
+        @keyframes gridPulse {
+            0%, 100% { transform: scale(1.05); }
+            50% { transform: scale(1.1); }
+        }
+
+        .explanation-panel {
+            display: none;
+            background: rgba(168, 85, 247, 0.2);
+            border: 2px solid rgba(168, 85, 247, 0.5);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            animation: slideDown 0.4s ease-out;
+        }
+
+        .explanation-panel.show {
+            display: block;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .explanation-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #a855f7;
+            margin-bottom: 10px;
+        }
+
+        .explanation-content {
+            line-height: 1.6;
+        }
+
+        .explanation-details {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-family: monospace;
         }
 
         .response-container {
@@ -196,41 +433,78 @@
 
         .response-btn {
             padding: 20px;
-            background: #333;
-            border: 2px solid #444;
+            background: rgba(51, 51, 51, 0.8);
+            border: 2px solid rgba(68, 68, 68, 0.8);
             color: #fff;
-            border-radius: 5px;
+            border-radius: 10px;
             cursor: pointer;
             font-size: 1.1em;
             font-weight: bold;
-            transition: all 0.2s;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .response-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(74, 158, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .response-btn:hover::before {
+            width: 300px;
+            height: 300px;
         }
 
         .response-btn:hover {
-            background: #444;
+            transform: translateY(-3px);
             border-color: #4a9eff;
+            box-shadow: 0 8px 30px rgba(74, 158, 255, 0.5);
         }
 
         .response-btn:active {
-            background: #4a9eff;
+            transform: translateY(0);
         }
 
         .response-btn.feedback-correct {
-            animation: correctFlash 0.3s;
+            animation: correctFlash 0.6s;
         }
 
         .response-btn.feedback-incorrect {
-            animation: incorrectFlash 0.3s;
+            animation: incorrectFlash 0.6s;
         }
 
         @keyframes correctFlash {
-            0%, 100% { background: #333; }
-            50% { background: #2ecc71; }
+            0%, 100% {
+                background: rgba(51, 51, 51, 0.8);
+                border-color: rgba(68, 68, 68, 0.8);
+                box-shadow: none;
+            }
+            50% {
+                background: linear-gradient(135deg, #2ecc71, #27ae60);
+                border-color: #2ecc71;
+                box-shadow: 0 0 40px rgba(46, 204, 113, 0.8);
+            }
         }
 
         @keyframes incorrectFlash {
-            0%, 100% { background: #333; }
-            50% { background: #e74c3c; }
+            0%, 100% {
+                background: rgba(51, 51, 51, 0.8);
+                border-color: rgba(68, 68, 68, 0.8);
+                box-shadow: none;
+            }
+            50% {
+                background: linear-gradient(135deg, #e74c3c, #c0392b);
+                border-color: #e74c3c;
+                box-shadow: 0 0 40px rgba(231, 76, 60, 0.8);
+            }
         }
 
         .keyboard-hints {
@@ -238,13 +512,17 @@
             color: #888;
             font-size: 0.9em;
             margin-top: 10px;
+            animation: fadeIn 1s ease-out 0.5s both;
         }
 
         .results {
-            background: #2a2a2a;
+            background: rgba(42, 42, 42, 0.8);
+            backdrop-filter: blur(10px);
             padding: 30px;
-            border-radius: 10px;
+            border-radius: 15px;
             margin-bottom: 30px;
+            border: 1px solid rgba(74, 158, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
 
         .result-item {
@@ -252,9 +530,21 @@
             justify-content: space-between;
             align-items: center;
             padding: 15px;
-            background: #333;
-            border-radius: 5px;
+            background: rgba(51, 51, 51, 0.6);
+            border-radius: 10px;
             margin-bottom: 10px;
+            transition: all 0.3s ease;
+            animation: slideIn 0.5s ease-out backwards;
+        }
+
+        .result-item:nth-child(1) { animation-delay: 0.1s; }
+        .result-item:nth-child(2) { animation-delay: 0.2s; }
+        .result-item:nth-child(3) { animation-delay: 0.3s; }
+        .result-item:nth-child(4) { animation-delay: 0.4s; }
+
+        .result-item:hover {
+            transform: translateX(5px);
+            background: rgba(68, 68, 68, 0.6);
         }
 
         .result-label {
@@ -267,15 +557,25 @@
         }
 
         .result-value.excellent {
-            color: #2ecc71;
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(46, 204, 113, 0.5);
         }
 
         .result-value.good {
-            color: #f39c12;
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .result-value.poor {
-            color: #e74c3c;
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .result-buttons {
@@ -286,27 +586,32 @@
         .result-buttons button {
             flex: 1;
             padding: 15px;
-            background: #4a9eff;
+            background: linear-gradient(135deg, #4a9eff, #a855f7);
             border: none;
             color: #fff;
-            border-radius: 5px;
+            border-radius: 10px;
             font-size: 1.1em;
             font-weight: bold;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(74, 158, 255, 0.4);
         }
 
         .result-buttons button:hover {
-            background: #3a8eef;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(74, 158, 255, 0.6);
         }
 
         .result-buttons button:last-child {
-            background: #333;
-            border: 2px solid #444;
+            background: rgba(51, 51, 51, 0.8);
+            border: 2px solid rgba(68, 68, 68, 0.8);
+            box-shadow: none;
         }
 
         .result-buttons button:last-child:hover {
-            background: #444;
+            background: rgba(68, 68, 68, 0.8);
+            border-color: #4a9eff;
+            box-shadow: 0 0 20px rgba(74, 158, 255, 0.4);
         }
 
         @media (max-width: 600px) {
@@ -368,6 +673,16 @@
                         <button class="option-btn" data-value="60">60 Trials</button>
                     </div>
                 </div>
+
+                <div class="setting-group">
+                    <label class="practice-toggle">
+                        <input type="checkbox" id="practiceMode">
+                        <div>
+                            <div class="practice-label">Practice Mode</div>
+                            <div class="practice-description">Get explanations when you answer incorrectly</div>
+                        </div>
+                    </label>
+                </div>
             </div>
 
             <button class="start-btn" onclick="startGame()">Start Game</button>
@@ -377,11 +692,18 @@
         <div id="gameScreen" class="screen">
             <div class="game-header">
                 <div class="game-info">
+                    <span id="practiceBadge" class="practice-badge" style="display: none;">PRACTICE</span>
                     Trial: <span id="trialNumber">1</span>/<span id="totalTrials">40</span> |
                     <span id="nLevelDisplay">2</span>-Back |
                     Accuracy: <span id="accuracy">0%</span>
                 </div>
                 <button class="pause-btn" onclick="pauseGame()">Pause</button>
+            </div>
+
+            <div id="explanationPanel" class="explanation-panel">
+                <div class="explanation-title">❌ Incorrect - Let's review</div>
+                <div class="explanation-content" id="explanationContent"></div>
+                <div class="explanation-details" id="explanationDetails"></div>
             </div>
 
             <div class="grid-container">
@@ -450,12 +772,14 @@
             isPlaying: false,
             isPaused: false,
             trialTimeout: null,
-            awaitingResponse: false
+            awaitingResponse: false,
+            practiceMode: false
         };
 
         const LETTERS = ['C', 'H', 'K', 'L', 'Q', 'R', 'S', 'T'];
-        const TRIAL_DURATION = 2500; // 2.5 seconds per trial
-        const STIMULUS_DURATION = 500; // 500ms for stimulus display
+        const TRIAL_DURATION = 2500;
+        const STIMULUS_DURATION = 500;
+        const PRACTICE_EXPLANATION_DURATION = 3000;
 
         // Screen management
         function showScreen(screenId) {
@@ -488,6 +812,7 @@
         function startGame() {
             const nLevel = parseInt(document.querySelector('#nLevelOptions .option-btn.selected').dataset.value);
             const totalTrials = parseInt(document.querySelector('#trialsOptions .option-btn.selected').dataset.value);
+            const practiceMode = document.getElementById('practiceMode').checked;
 
             gameState.nLevel = nLevel;
             gameState.totalTrials = totalTrials;
@@ -496,11 +821,14 @@
             gameState.responses = [];
             gameState.isPlaying = true;
             gameState.isPaused = false;
+            gameState.practiceMode = practiceMode;
 
             document.getElementById('nLevelDisplay').textContent = nLevel;
             document.getElementById('totalTrials').textContent = totalTrials;
             document.getElementById('trialNumber').textContent = '0';
             document.getElementById('accuracy').textContent = '0%';
+            document.getElementById('practiceBadge').style.display = practiceMode ? 'inline-block' : 'none';
+            document.getElementById('explanationPanel').classList.remove('show');
 
             showScreen('gameScreen');
             nextTrial();
@@ -518,6 +846,9 @@
             gameState.currentTrial++;
             gameState.awaitingResponse = false;
 
+            // Hide explanation panel
+            document.getElementById('explanationPanel').classList.remove('show');
+
             // Generate random position and letter
             const position = Math.floor(Math.random() * 9);
             const letter = LETTERS[Math.floor(Math.random() * LETTERS.length)];
@@ -533,7 +864,6 @@
             // Schedule next trial
             gameState.trialTimeout = setTimeout(() => {
                 if (!gameState.awaitingResponse && gameState.isPlaying) {
-                    // Auto-submit "neither" if no response
                     handleResponse('neither', true);
                 }
             }, TRIAL_DURATION);
@@ -549,10 +879,8 @@
                 }
             });
 
-            // Play audio
             playAudio(letter);
 
-            // Hide stimulus after duration
             setTimeout(() => {
                 squares[position].classList.remove('active');
                 gameState.awaitingResponse = true;
@@ -570,13 +898,52 @@
             }
         }
 
+        // Get position description
+        function getPositionDescription(pos) {
+            const positions = [
+                'Top-Left', 'Top-Center', 'Top-Right',
+                'Middle-Left', 'Center', 'Middle-Right',
+                'Bottom-Left', 'Bottom-Center', 'Bottom-Right'
+            ];
+            return positions[pos];
+        }
+
+        // Show explanation
+        function showExplanation(responseType, correctAnswer, currentTrial, nBackTrial) {
+            const posMatch = currentTrial.position === nBackTrial.position;
+            const audioMatch = currentTrial.letter === nBackTrial.letter;
+
+            let explanation = '';
+
+            if (correctAnswer === 'neither') {
+                explanation = `Nothing matched! The position changed from <strong>${getPositionDescription(nBackTrial.position)}</strong> to <strong>${getPositionDescription(currentTrial.position)}</strong>, and the letter changed from <strong>${nBackTrial.letter}</strong> to <strong>${currentTrial.letter}</strong>.`;
+            } else if (correctAnswer === 'position') {
+                explanation = `Only the <strong>position</strong> matched! Both were at <strong>${getPositionDescription(currentTrial.position)}</strong>, but the letter changed from <strong>${nBackTrial.letter}</strong> to <strong>${currentTrial.letter}</strong>.`;
+            } else if (correctAnswer === 'audio') {
+                explanation = `Only the <strong>audio</strong> matched! Both were the letter <strong>${currentTrial.letter}</strong>, but the position changed from <strong>${getPositionDescription(nBackTrial.position)}</strong> to <strong>${getPositionDescription(currentTrial.position)}</strong>.`;
+            } else if (correctAnswer === 'both') {
+                explanation = `<strong>Both</strong> matched! The position stayed at <strong>${getPositionDescription(currentTrial.position)}</strong> and the letter stayed <strong>${currentTrial.letter}</strong>.`;
+            }
+
+            const details = `
+                Current trial: Position = ${getPositionDescription(currentTrial.position)}, Letter = ${currentTrial.letter}<br>
+                ${gameState.nLevel}-back trial: Position = ${getPositionDescription(nBackTrial.position)}, Letter = ${nBackTrial.letter}<br>
+                <br>
+                You answered: <strong>${responseType.toUpperCase()}</strong><br>
+                Correct answer: <strong>${correctAnswer.toUpperCase()}</strong>
+            `;
+
+            document.getElementById('explanationContent').innerHTML = explanation;
+            document.getElementById('explanationDetails').innerHTML = details;
+            document.getElementById('explanationPanel').classList.add('show');
+        }
+
         // Handle response
         function handleResponse(responseType, autoSubmit = false) {
             if (!gameState.isPlaying || gameState.isPaused || (!gameState.awaitingResponse && !autoSubmit)) {
                 return;
             }
 
-            // Clear timeout
             if (gameState.trialTimeout) {
                 clearTimeout(gameState.trialTimeout);
             }
@@ -585,10 +952,11 @@
             const nBackIndex = currentIndex - gameState.nLevel;
 
             let isCorrect = false;
+            let correctAnswer = 'neither';
 
             if (nBackIndex < 0) {
-                // First N trials - no valid comparison, always count as correct if "neither" selected
                 isCorrect = (responseType === 'neither');
+                correctAnswer = 'neither';
             } else {
                 const currentTrial = gameState.trials[currentIndex];
                 const nBackTrial = gameState.trials[nBackIndex];
@@ -596,14 +964,21 @@
                 const positionMatch = currentTrial.position === nBackTrial.position;
                 const audioMatch = currentTrial.letter === nBackTrial.letter;
 
-                if (responseType === 'neither') {
-                    isCorrect = !positionMatch && !audioMatch;
-                } else if (responseType === 'position') {
-                    isCorrect = positionMatch && !audioMatch;
-                } else if (responseType === 'audio') {
-                    isCorrect = !positionMatch && audioMatch;
-                } else if (responseType === 'both') {
-                    isCorrect = positionMatch && audioMatch;
+                if (positionMatch && audioMatch) {
+                    correctAnswer = 'both';
+                } else if (positionMatch) {
+                    correctAnswer = 'position';
+                } else if (audioMatch) {
+                    correctAnswer = 'audio';
+                } else {
+                    correctAnswer = 'neither';
+                }
+
+                isCorrect = (responseType === correctAnswer);
+
+                // Show explanation if in practice mode and answer is wrong
+                if (gameState.practiceMode && !isCorrect && nBackIndex >= 0) {
+                    showExplanation(responseType, correctAnswer, currentTrial, nBackTrial);
                 }
             }
 
@@ -620,15 +995,15 @@
                     btn.classList.add(isCorrect ? 'feedback-correct' : 'feedback-incorrect');
                     setTimeout(() => {
                         btn.classList.remove('feedback-correct', 'feedback-incorrect');
-                    }, 300);
+                    }, 600);
                 }
             });
 
-            // Update accuracy
             updateAccuracy();
 
-            // Schedule next trial
-            setTimeout(nextTrial, 500);
+            // Schedule next trial with delay for explanation in practice mode
+            const delay = (gameState.practiceMode && !isCorrect && nBackIndex >= 0) ? PRACTICE_EXPLANATION_DURATION : 500;
+            setTimeout(nextTrial, delay);
         }
 
         // Update accuracy display
@@ -662,10 +1037,8 @@
             const totalResponses = responses.length;
             const correctResponses = responses.filter(r => r.correct).length;
 
-            // Overall accuracy
             const overallAccuracy = totalResponses > 0 ? (correctResponses / totalResponses * 100) : 0;
 
-            // Calculate specific accuracies based on actual trial conditions
             let positionMatchTrials = 0;
             let positionCorrect = 0;
             let audioMatchTrials = 0;
@@ -711,7 +1084,6 @@
             const audioAccuracy = audioMatchTrials > 0 ? (audioCorrect / audioMatchTrials * 100) : 0;
             const dualAccuracy = dualMatchTrials > 0 ? (dualCorrect / dualMatchTrials * 100) : 0;
 
-            // Display results
             displayResult('overallAccuracy', overallAccuracy);
             displayResult('positionAccuracy', positionAccuracy);
             displayResult('audioAccuracy', audioAccuracy);
